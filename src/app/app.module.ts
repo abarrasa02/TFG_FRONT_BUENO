@@ -8,6 +8,10 @@ import { RegisterComponent } from './register/register.component';
 import { ProductoComponent } from './Admistracion/producto/producto.component';
 import { ProductoDetailComponent } from './Admistracion/producto-detail/producto-detail.component';
 import { HeaderMenuComponent } from './header-menu/header-menu.component';
+import { AppLayoutComponent } from './app-layout/app-layout.component';
+import { CategoriaComponent } from './Admistracion/categoria/categoria.component';
+import { CategoriaDetailComponent } from './Admistracion/categoria-detail/categoria-detail.component';
+import { HomeComponent } from './Admistracion/home/home.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +20,11 @@ import { HeaderMenuComponent } from './header-menu/header-menu.component';
     RegisterComponent,
     ProductoComponent,
     ProductoDetailComponent,
-    HeaderMenuComponent
+    HeaderMenuComponent,
+    AppLayoutComponent,
+    CategoriaComponent,
+    CategoriaDetailComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

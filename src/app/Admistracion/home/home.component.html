@@ -1,0 +1,9 @@
+<div class="carousel-container">
+    <div class="carousel-item" *ngFor="let categoria of categorias">
+      <div class="image-container">
+        <img [src]="categoria.imagen" alt="{{ categoria.nombre }}">
+        <h3>{{ categoria.nombre }}</h3>
+      </div>
+    </div>
+  </div>
+  
