@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Categoria } from '../Models/categoria.model';
 import { CategoriaService } from 'src/app/Services/categoria.service';
+import { ObjectResponse } from 'src/app/core/base/service/backend-service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -8,19 +10,46 @@ import { CategoriaService } from 'src/app/Services/categoria.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent  implements OnInit{
-
+ errorMessage: string="";
+ ListCategorias:Categoria[]=[]
 
   constructor(  
-
+    private readonly categoriaService:CategoriaService,
+    private domSanitizer: DomSanitizer
   ){
-   
+    
   }
-  ListCategorias:Categoria[]=[]
+ 
 
   ngOnInit(): void {
-    this.crearCategorias();
+    this.cogerCategorias();
   }
 
+  cogerCategorias() {
+    this.categoriaService.getAllCategorias().subscribe({
+      next: (response: ObjectResponse<Categoria[]>) => {
+        if (response.success) {
+          this.ListCategorias = response.message.map(categoria => ({
+            ...categoria,
+            imagen: this.convertirBlobAUrl(categoria.imagen)
+          }));
+        } else {
+          this.errorMessage = response.error;
+          console.log(this.errorMessage)
+        }
+      }
+    })
+  }
+
+  convertirBlobAUrl(data: any): SafeUrl | string {
+    if (data instanceof Blob) {
+        const objectURL = URL.createObjectURL(data);
+        return this.domSanitizer.bypassSecurityTrustUrl(objectURL);
+    } else {
+        console.warn('El dato proporcionado no es un Blob');
+        return '';
+    }
+}
 
   crearCategorias() {
     this.ListCategorias=[];
@@ -48,8 +77,6 @@ export class HomeComponent  implements OnInit{
    
     this.ListCategorias.push(categoria1,categoria2,categoria3)
   }
-  
- 
   images = [
     'https://ejemplo.com/imagen1.jpg',
     'https://ejemplo.com/imagen2.jpg',

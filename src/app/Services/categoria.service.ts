@@ -8,17 +8,27 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriaService extends BackendService  {
+export class CategoriaService   {
 
- 
+  private urlApi = 'http://localhost:8080/categoria'; 
   constructor(private readonly http: HttpClient) { 
-   super();
+
   }
  
 
-  getAllCategorias():Observable<ObjectResponse<Categoria[]>>{
-      return this.http.get<ObjectResponse<Categoria[]>>(
-        `${this.urlApi}/categoria/all`,
+  getAllCategorias():Observable<any>{
+      return this.http.get<any>(
+        `${this.urlApi}/all`,
       )
+  }
+
+
+  deleteCategoria(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.urlApi}/eliminar/${id}`);
+}
+  
+  addCategoria(categoria: any): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<any>(`${this.urlApi}/add`, categoria, { headers: headers });
   }
 }

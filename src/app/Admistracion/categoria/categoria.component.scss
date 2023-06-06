@@ -1,22 +1,12 @@
-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
+table img {
+  width: 1px;
+  height: 1px;
+}
+
   
-  thead th {
-    background-color: #f2f2f2;
-  }
-  
-  tbody tr:hover {
-    background-color: #eaeaea;
-    cursor: pointer;
-  }
-  
-  tbody tr.selected {
-    background-color: #b3d4fc;
-  }
-  .text-center {
-    text-align: center;
-  }
-  
-    
+.button-container {
+  position: fixed;
+  top: 120px; /* Ajusta la distancia desde la parte superior de la pantalla según sea necesario */
+  right: 20px; /* Ajusta la distancia desde el borde derecho de la pantalla según sea necesario */
+  z-index: 9999; /* Asegura que el botón esté en la parte superior de otros elementos */
+}
