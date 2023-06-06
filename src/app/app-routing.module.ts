@@ -9,12 +9,12 @@ import { AppLayoutComponent } from './app-layout/app-layout.component';
 
 
 const routes:Routes=[
-  
+  {path: 'categoria',component:CategoriaComponent},
   {path: 'login', component:LoginComponent},
   {path: 'register', component:RegisterComponent},
   {path:'',component:HomeComponent,
   children:[
-  {path: 'categoria',component:CategoriaComponent},
+    
   {path: 'categoria-detail',component:CategoriaDetailComponent},
   {path: 'categoria-detail/:id',component:CategoriaDetailComponent},
   ]

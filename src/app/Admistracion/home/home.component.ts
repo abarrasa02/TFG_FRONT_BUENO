@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Categoria } from '../Models/categoria.model';
 import { CategoriaService } from 'src/app/Services/categoria.service';
+import { ObjectResponse } from 'src/app/core/base/service/backend-service';
 
 @Component({
   selector: 'app-home',
@@ -8,20 +9,32 @@ import { CategoriaService } from 'src/app/Services/categoria.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent  implements OnInit{
-
+ errorMessage: string="";
+ ListCategorias:Categoria[]=[]
 
   constructor(  
-
+    //private readonly categoriaService:CategoriaService
   ){
-   
+    
   }
-  ListCategorias:Categoria[]=[]
+ 
 
   ngOnInit(): void {
     this.crearCategorias();
   }
 
-
+  // cogerCategorias(){
+  //   this.categoriaService.getAllCategorias().subscribe({
+  //      next:(response:ObjectResponse<Categoria[]>)=>{
+  //        if(response.success){
+  //          this.ListCategorias=response.message;
+  //        }else{
+  //          this.errorMessage=response.error;
+  //          console.log(this.errorMessage)
+  //        }
+  //      }
+  //   })
+  // }
   crearCategorias() {
     this.ListCategorias=[];
     const categoria1: Categoria = {
@@ -48,8 +61,6 @@ export class HomeComponent  implements OnInit{
    
     this.ListCategorias.push(categoria1,categoria2,categoria3)
   }
-  
- 
   images = [
     'https://ejemplo.com/imagen1.jpg',
     'https://ejemplo.com/imagen2.jpg',
