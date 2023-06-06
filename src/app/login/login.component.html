@@ -1,3 +1,4 @@
+<app-header-menu></app-header-menu>
 <body>
 <div class="center">  
     <h1>Inicio sesion</h1>
@@ -12,7 +13,7 @@
         </div>
         <input type="button" value="Iniciar sesion">
         <div class="signup_link">
-            <a routerLink="register">Registrate aqui</a>
+            <a (click)="register()">Registrate aqui</a>
         </div>
     </form>
 </div>

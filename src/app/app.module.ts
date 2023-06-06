@@ -12,6 +12,7 @@ import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { CategoriaComponent } from './Admistracion/categoria/categoria.component';
 import { CategoriaDetailComponent } from './Admistracion/categoria-detail/categoria-detail.component';
 import { HomeComponent } from './Admistracion/home/home.component';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HomeComponent } from './Admistracion/home/home.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

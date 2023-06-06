@@ -1,6 +1,8 @@
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { enviroment } from 'src/enviroments/enviroment';
-import { InjectorInstance } from './services/injector.service'; 
+import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
+
+import { InjectorInstance } from "./services/injector.service";
+import { enviroment } from "src/enviroments/enviroment";
+
 
 export type Respuesta = ObjectResponse<any>;
 export interface ObjectResponse<T> {
@@ -90,104 +92,4 @@ export class BackendService {
       reject(response.error);
     }
   }
-
-  async get<T>(path: string, msgError: string, httpParams?: HttpParams): Promise<T> {
-
-    if (!httpParams) {
-      httpParams = new HttpParams();
-    }
-
-    return new Promise((resolve, reject) => {
-      this.httpClient.get(`${this.urlApi}/${path}`, { params: httpParams })
-        .subscribe((response: ObjectResponse<T>) => {
-          this.handleResponse(response, resolve, reject);
-        },
-          (error) => {
-            if (!msgError) {
-              msgError = error;
-            }
-            reject(msgError);
-          }
-        );
-    });
-
-  }
-
-
-
-  async post<T>(path: string, msgError: string, bodyParams?: any): Promise<T> {
-
-    return new Promise((resolve, reject) => {
-      this.httpClient.post(`${this.urlApi}/${path}`, bodyParams)
-        .subscribe((response: ObjectResponse<T>) => {
-          this.handleResponse(response, resolve, reject);
-        },
-          (error) => {
-            if (!msgError) {
-              msgError = error;
-            }
-            reject(msgError);
-          }
-        );
-    });
-
-  }
-
-  async put<T>(path: string, msgError: string, bodyParams?: any): Promise<T> {
-
-    return new Promise((resolve, reject) => {
-      this.httpClient.put(`${this.urlApi}/${path}`, bodyParams)
-        .subscribe((response: ObjectResponse<T>) => {
-          this.handleResponse(response, resolve, reject);
-        },
-          (error) => {
-            if (!msgError) {
-              msgError = error;
-            }
-            reject(msgError);
-          }
-        );
-    });
-
-  }
-
-  async patch<T>(path: string, msgError: string, bodyParams?: any): Promise<T> {
-
-    return new Promise((resolve, reject) => {
-      this.httpClient.patch(`${this.urlApi}/${path}`, bodyParams)
-        .subscribe((response: ObjectResponse<T>) => {
-          this.handleResponse(response, resolve, reject);
-        },
-          (error) => {
-            if (!msgError) {
-              msgError = error;
-            }
-            reject(msgError);
-          }
-        );
-    });
-
-  }
-
-  async delete<T>(path: string, msgError: string): Promise<T> {
-
-    return new Promise((resolve, reject) => {
-      this.httpClient.delete(`${this.urlApi}/${path}`).subscribe(
-        (response: ObjectResponse<T>) => {
-          this.handleResponse(response, resolve, reject);
-        },
-        (error) => {
-          if (!msgError) {
-            msgError = error;
-          }
-          reject(msgError);
-        }
-      );
-    });
-
-  }
-
-
-
-
 }

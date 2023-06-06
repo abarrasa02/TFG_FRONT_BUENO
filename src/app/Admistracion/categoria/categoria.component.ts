@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Categoria } from '../Models/categoria.model';
 import { Router } from '@angular/router';
+import { CategoriaService } from 'src/app/Services/categoria.service';
 
 
 @Component({
@@ -10,7 +11,8 @@ import { Router } from '@angular/router';
 })
 export class CategoriaComponent implements OnInit {
 
-  constructor( private readonly router: Router,){
+  constructor( private readonly router: Router,
+    private readonly categoriaService :CategoriaService){
 
   }
   categoriaSeleccionada: Categoria | null = null;
@@ -22,6 +24,8 @@ export class CategoriaComponent implements OnInit {
   isOpenSuccessMessage: boolean=false;
   isOpenErrorMessage: boolean=false;
 
+
+  
   categorias: Categoria[] = [
     { id: 1, nombre: 'Categoría 1', imagen: "", activo: 'Sí' },
     { id: 2, nombre: 'Categoría 2', imagen: "", activo: 'No' },
@@ -29,8 +33,12 @@ export class CategoriaComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-  
+    
   }
+
+
+
+
 
   añadirCategoria(){
     this.router.navigate(['categoria-detail'])
@@ -42,21 +50,13 @@ export class CategoriaComponent implements OnInit {
   selectedCategories(){
   
   }
+  
+  // cogerCategorias(){
+  //   this.categoriaService.getAllCategorias().subscribe({
+      
+  //   })
+  // }
 
-  toggleSelection(categoria: Categoria) {
-    if (this.categoriaSeleccionada === categoria) {
-      this.categoriaSeleccionada = null;
-    } else {
-      this.categoriaSeleccionada = categoria;
-    }
-    this.emitCategoryId(this.categoriaSeleccionada?.id);
-  }
-  emitCategoryId(id: number | undefined) {
-    // Hacer lo que necesites con el ID de la categoría (por ejemplo, enviarlo a un servicio o realizar una acción)
-    console.log('ID de la categoría:', id);
-  }
 
-  isCategoriaSelected(categoria: Categoria): boolean {
-    return this.categoriaSeleccionada === categoria;
-  }
+ 
 }
