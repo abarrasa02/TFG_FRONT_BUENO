@@ -11,13 +11,16 @@ export class HomeComponent  implements OnInit{
 
 
   constructor(  
+
   ){
+   
   }
   ListCategorias:Categoria[]=[]
 
   ngOnInit(): void {
     this.crearCategorias();
   }
+
 
   crearCategorias() {
     this.ListCategorias=[];

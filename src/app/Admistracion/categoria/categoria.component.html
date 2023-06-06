@@ -1,0 +1,21 @@
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th class="text-center"></th>
+        <th class="text-center">ID</th>
+        <th class="text-center">Nombre</th>
+        <th class="text-center">Activo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let categoria of categorias" [class.selected]="isCategoriaSelected(categoria)">
+        <td>
+          <input type="checkbox" [checked]="isCategoriaSelected(categoria)" (change)="toggleSelection(categoria)">
+        </td>
+        <td class="text-center">{{ categoria.id }}</td>
+        <td class="text-center">{{ categoria.nombre }}</td>
+        <td class="text-center">{{ categoria.activo }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
