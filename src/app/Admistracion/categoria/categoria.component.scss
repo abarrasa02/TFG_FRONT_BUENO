@@ -3,4 +3,10 @@ table img {
   height: 1px;
 }
 
-    
+  
+.button-container {
+  position: fixed;
+  top: 120px; /* Ajusta la distancia desde la parte superior de la pantalla según sea necesario */
+  right: 20px; /* Ajusta la distancia desde el borde derecho de la pantalla según sea necesario */
+  z-index: 9999; /* Asegura que el botón esté en la parte superior de otros elementos */
+}
