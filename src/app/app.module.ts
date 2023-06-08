@@ -13,6 +13,8 @@ import { CategoriaComponent } from './Admistracion/categoria/categoria.component
 import { CategoriaDetailComponent } from './Admistracion/categoria-detail/categoria-detail.component';
 import { HomeComponent } from './Admistracion/home/home.component';
 import { TableModule } from 'primeng/table';
+import {ButtonModule} from 'primeng/button';
+import {MenubarModule} from 'primeng/menubar';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { TableModule } from 'primeng/table';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    TableModule
+    TableModule,
+    ButtonModule,
+    MenubarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
