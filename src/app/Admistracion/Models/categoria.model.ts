@@ -1,7 +1,7 @@
 export interface Categoria{
     id:number
     nombre:String
-    imagen: any
+    imagen: string
     activo:String
     
 }

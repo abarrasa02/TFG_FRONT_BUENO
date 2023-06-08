@@ -13,13 +13,6 @@ import { CategoriaComponent } from './Admistracion/categoria/categoria.component
 import { CategoriaDetailComponent } from './Admistracion/categoria-detail/categoria-detail.component';
 import { HomeComponent } from './Admistracion/home/home.component';
 import { TableModule } from 'primeng/table';
-import {ButtonModule} from 'primeng/button';
-import {MenubarModule} from 'primeng/menubar';
-import { HttpClientModule } from '@angular/common/http';
-import { InputTextModule } from 'primeng/inputtext';
-import { DropdownModule } from 'primeng/dropdown'
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -37,14 +30,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    TableModule,
-    ButtonModule,
-    MenubarModule,
-    HttpClientModule,
-    InputTextModule,
-    FormsModule,
-    ReactiveFormsModule,
-    DropdownModule
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
