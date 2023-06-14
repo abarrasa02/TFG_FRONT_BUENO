@@ -22,7 +22,7 @@ export class CategoriaComponent implements OnInit {
   ListCategorias: Categoria[] = [];
   successMessage: string = "";
   errorMessage: string = "";
-  idCategoria: Number = 0;
+  idCategoria: Number;
   isOpenSuccessMessage: boolean = false;
   isOpenErrorMessage: boolean = false;
 
@@ -41,13 +41,15 @@ export class CategoriaComponent implements OnInit {
   anadirCategoria() {
     this.router.navigate(['categoria-detail'])
   }
-  editarCategoria() {
-    this.router.navigate(['categoria-detail', this.idCategoria])
+  editarCategoria(id:number) {
+    this.router.navigate(['categoria-detail', id])
   }
   deleteCategoria(id: number) {
     this.categoriaService.deleteCategoria(id).subscribe(
       response => {
         console.log('Categoría eliminada con éxito', response);
+        this.ListCategorias = [];
+        this.cogerCategorias();
       },
       error => {
         console.error('Error al eliminar la categoría', error);

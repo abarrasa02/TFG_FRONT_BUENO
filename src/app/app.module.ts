@@ -20,6 +20,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown'
 import { ReactiveFormsModule } from '@angular/forms';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ProductoTiendaComponent } from './Admistracion/producto-tienda/producto-tienda.component';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { CarritoComponent } from './Admistracion/carrito/carrito.component';
+
+
 
 @NgModule({
   declarations: [
@@ -32,7 +38,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppLayoutComponent,
     CategoriaComponent,
     CategoriaDetailComponent,
-    HomeComponent
+    HomeComponent,
+    ProductoTiendaComponent,
+    CarritoComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +52,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     InputTextModule,
     FormsModule,
     ReactiveFormsModule,
-    DropdownModule
+    DropdownModule,
+    FileUploadModule,
+    BrowserAnimationsModule
+  
+    
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

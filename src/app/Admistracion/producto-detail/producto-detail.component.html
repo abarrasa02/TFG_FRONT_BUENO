@@ -1,1 +1,36 @@
-<p>producto-detail works!</p>
+
+<div class="container d-flex justify-content-center">
+  <form class="form-container" (ngSubmit)="onSubmit()">
+    <div class="form-group" style="margin-bottom: 10px;">
+      <label for="nombre" style="display: block; font-weight: bold; margin-bottom: 10px;">Nombre:</label>
+      <input type="text" id="nombre" pInputText [(ngModel)]="producto.nombre" name="nombre" required>
+    </div>
+
+    <div class="form-group" style="margin-bottom: 10px;">
+      <label for="imagen" style="display: block; font-weight: bold;">Imagen:</label>
+      <input type="file" id="imagen" class="form-control" (change)="onFileChange($event)" name="imagen" required>
+    </div>
+
+    <div class="form-group" style="margin-bottom: 10px;">
+      <label for="descripcion" style="display: block; font-weight: bold;">Descripción:</label>
+      <input type="text" id="descripcion" pInputText [(ngModel)]="producto.descripcion" name="descripcion" required>
+    </div>
+
+    <div class="form-group" style="margin-bottom: 10px;">
+      <label for="precio" style="display: block; font-weight: bold;">Precio:</label>
+      <input type="text" id="precio" pInputText [(ngModel)]="producto.precio" name="precio" required>
+    </div>
+
+    <div class="form-group" style="margin-bottom: 10px;">
+      <label for="categoria" style="display: block; font-weight: bold;">Categoría:</label>
+      <p-dropdown  placeholder="Selecciona una categoria" [options]="ListCategorias" [(ngModel)]="producto.categoria" (onChange)="onChangeCategoria($event)" optionLabel="nombre"></p-dropdown>
+    </div>
+
+    <div class="form-group" style="margin-bottom: 10px;">
+      <label for="activo" style="display: block; font-weight: bold;">Activo:</label>
+      <input type="text" id="activo" pInputText [(ngModel)]="producto.activo" name="activo" required>
+    </div>
+
+    <button type="submit" pButton>Añadir producto</button>
+  </form>
+</div>

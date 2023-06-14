@@ -1,17 +1,17 @@
-
+<app-header-menu></app-header-menu>
 <body>
 <div class="center">  
     <h1>Inicio sesion</h1>
     <form method="post">
         <div class="txt_field">
-            <input type="text" required>
+            <input type="text"  name="usuario" [(ngModel)]="usuario" required>
             <label>Usuario</label>
         </div>
         <div class="txt_field">
-            <input type="password" required>
+            <input type="password" name="contrasena" [(ngModel)]="contrasena" required>
             <label>Contraseña</label>
         </div>
-        <input type="button" value="Iniciar sesion">
+        <input type="button" value="Iniciar sesion" (click)="login()">
         <div class="signup_link">
             <a (click)="register()">Registrate aqui</a>
         </div>

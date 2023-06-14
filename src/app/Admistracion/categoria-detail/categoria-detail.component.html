@@ -1,19 +1,20 @@
-<form (ngSubmit)="onSubmit()">
-    <div>
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" [(ngModel)]="categoria.nombre" name="nombre" required>
+<div class="container d-flex justify-content-center">
+  <form class="form-container" (ngSubmit)="onSubmit()">
+    <div class="form-group" style="margin-bottom: 10px;">
+      <label for="nombre" style="display: block; font-weight: bold;">Nombre:</label>
+      <input type="text" id="nombre" pInputText [(ngModel)]="categoria.nombre" name="nombre" required>
+    </div>
+
+    <div class="form-group" style="margin-bottom: 10px;">
+      <label for="imagen" style="display: block; font-weight: bold;">Imagen:</label>
+      <input type="file" id="imagen" class="form-control" (change)="onFileChange($event)" name="imagen" required>
+    </div>
+
+    <div class="form-group" style="margin-bottom: 10px;">
+      <label for="activo" style="display: block; font-weight: bold;">Activo:</label>
+      <input type="text" id="activo" pInputText [(ngModel)]="categoria.activo" name="activo" required>
     </div>
   
-    <div>
-      <label for="imagen">Imagen:</label>
-      <input type="file" id="imagen" (change)="onFileChange($event)" name="imagen" required>
-    </div>
-  
-    <div>
-      <label for="activo">Activo:</label>
-      <input type="text" id="activo" [(ngModel)]="categoria.activo" name="activo" required>
-    </div>
-  
-    <button type="submit">Submit</button>
+    <button type="submit" pButton>Submit</button>
   </form>
-  
+</div>

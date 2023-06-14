@@ -1,3 +1,4 @@
+<app-header-menu></app-header-menu>
 <div class="button-container">
     <button pButton type="button" label="Nueva Categoria" icon="pi pi-plus" class="p-button-rounded p-button-success" (click)="anadirCategoria()"></button>
     </div>
@@ -18,7 +19,7 @@
                 <td>{{categoria.activo}}</td>
                 
                 <td>
-                    <button pButton type="button" icon="pi pi-pencil" class="p-button-success" (click)="editarCategoria()"></button>
+                    <button pButton type="button" icon="pi pi-pencil" class="p-button-success" (click)="editarCategoria(categoria.id)"></button>
                     <button pButton type="button" icon="pi pi-trash" class="p-button-danger" (click)="deleteCategoria(categoria.id)"></button>
                 </td>
             </tr>

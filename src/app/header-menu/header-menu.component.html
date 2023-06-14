@@ -5,15 +5,17 @@
     <nav>
         <ul class="nav-links">
             <li class="dropdown">
-                <a href="">ADMIN</a>
+                <a *ngIf="isAdmin">ADMIN</a>
                 <ul class="dropdown-menu">
                     <li><a href="">Productos</a></li>
                     <li><a (click)="categoria()">Categorias</a></li>
                 </ul>
             </li>
             <li class="spacer"></li>
-            <li><a  (click)="login()">LOGIN</a></li>
-            <li><a   (click)="register()">REGISTER</a></li>
+            <li><a *ngIf="!uLog" (click)="login()">LOGIN</a></li>
+            <li><a *ngIf="!uLog" (click)="register()">REGISTER</a></li>
+            <li><a  (click)="carrito()">CARRITO</a></li>
+            <li><a *ngIf="uLog" (click)="logout()">LOGOUT</a></li>
         </ul>
     </nav>
 </header>

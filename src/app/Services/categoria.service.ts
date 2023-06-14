@@ -29,4 +29,25 @@ export class CategoriaService   {
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
       return this.http.post<any>(`${this.urlApi}/add`, categoria, { headers: headers });
     }
+
+    findById(id:number):Observable<any>{
+      return this.http.get<ObjectResponse<any>>(
+        `${this.urlApi}/categoria/${id}`,
+      )
+    }
+
+    addImagenCategoria(imagen:File,id:number):Observable<any>{
+      const imageFormData = new FormData();
+      imageFormData.append('id',id.toString())
+      imageFormData.append('image', imagen, imagen.name);
+      return this.http.post<any>(`${this.urlApi}/getImage`,imageFormData);
+    }
+
+    editCategoria(categoria:any,id:number){
+      const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+      return this.http.patch<any>(
+        `${this.urlApi}/edit/${id}`,categoria, { headers: headers });
+      
+    }
+
 }

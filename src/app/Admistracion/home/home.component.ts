@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Categoria } from '../Models/categoria.model';
 import { CategoriaService } from 'src/app/Services/categoria.service';
 import { ObjectResponse } from 'src/app/core/base/service/backend-service';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
@@ -15,22 +16,29 @@ export class HomeComponent  implements OnInit{
  
 
   constructor(  
-    private readonly categoriaService:CategoriaService,
-    private domSanitizer: DomSanitizer
+    private readonly router: Router,
+    private readonly categoriaService:CategoriaService
   ){
     
   }
  
 
   ngOnInit(): void {
+    this.isLogged();
     this.cogerCategorias();
   }
 
+  isLogged(){
+   
+ }
+
    cogerCategorias(){
      this.categoriaService.getAllCategorias().subscribe({
+      
         next:(response:ObjectResponse<Categoria[]>)=>{
           if(response.success){
            this.ListCategorias=response.message;
+           console.log(this.ListCategorias)
           }else{
            this.errorMessage=response.error;
            console.log(this.errorMessage)
@@ -39,15 +47,10 @@ export class HomeComponent  implements OnInit{
      })
    }
  
+   filtrarCategoria(id:number){
+    sessionStorage.setItem('idCategoria',JSON.stringify(id));
+    this.router.navigate(['producto-tienda'])
+   }
  
-   convertirBlobAUrl(data: any): SafeUrl | string {
   
-    if (data instanceof Blob) {
-      const objectURL = URL.createObjectURL(data);
-      return this.domSanitizer.bypassSecurityTrustUrl(objectURL);
-    } else {
-      console.warn('El dato proporcionado no es un Blob');
-      return '';
-    }
-  }
 }

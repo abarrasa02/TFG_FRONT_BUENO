@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriaService } from 'src/app/Services/categoria.service';
 import { Categoria } from '../Models/categoria.model';
+import { OPERACION } from '../Utils/constantes';
 
 @Component({
   selector: 'app-categoria-detail',
@@ -16,31 +17,62 @@ export class CategoriaDetailComponent implements OnInit {
     imagen: null,
     activo: ''
   };
+  op: OPERACION = OPERACION.NEW;
+  OPS = OPERACION;
   imagenBase64: string = "";
+  idCategoria:number;
+  imagenCat:File=null;
+
   constructor(
+    private activatedRoute: ActivatedRoute,
     private readonly categoriaService: CategoriaService,
-    private readonly route: Router
+    private readonly route: Router,
   ) {
   }
   ngOnInit() {
-  }
-  onFileChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input && input.files && input.files.length > 0) {
-      const file = input.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imagenBase64 = reader.result?.toString() || '';
+    this.activatedRoute.params.subscribe(params => {
+      if (params && params['id']) {
+        this.op = this.OPS.EDIT;
+        this.idCategoria = params['id'];
+        this.fillForm(this.idCategoria);
+
+      } else {
+        this.op = this.OPS.NEW;
       }
-      reader.readAsDataURL(file);
-      this.categoria.imagen[0] = this.imagenBase64;
-    }
+    });
+  }
+  
+  onFileChange(event) {
+    
+  this.imagenCat=event.target.files[0];
+  }
+  
+
+  fillForm(id:any){
+     this.categoriaService.findById(id).subscribe({
+      next:(response)=>{
+       if(response.success){
+         this.categoria=response.message
+        ;
+       }else{
+         console.log("error")
+       }
+      }
+     })
+   }
+  volver(){
+    this.route.navigate(['categoria'])
   }
   onSubmit() {
-    this.categoriaService.addCategoria(this.categoria).subscribe(
+
+    if(this.op==this.OPS.NEW){
+      this.categoriaService.addCategoria(this.categoria).subscribe(
       (response) => {
-        console.log('Categoría añadida exitosamente', response);
-        this.route.navigate(['categoria'])
+        console.log(response);
+        this.categoriaService.addImagenCategoria(this.imagenCat,response.message).subscribe((response)=>{
+          console.log("Se ha añadido correctmente la imagen")
+          this.route.navigate(['categoria'])
+        })
         // Aquí puedes manejar la respuesta, como mostrar un mensaje de éxito.
       },
       (error) => {
@@ -48,5 +80,20 @@ export class CategoriaDetailComponent implements OnInit {
         // Aquí puedes manejar errores, como mostrar un mensaje de error.
       }
     );
+    }else if(this.op=this.OPS.EDIT){
+        this.categoriaService.editCategoria(this.categoria,this.idCategoria).subscribe((response)=>{
+          this.categoriaService.addImagenCategoria(this.imagenCat,response.message).subscribe((response)=>{
+            console.log("Se ha añadido correctmente la imagen")
+            this.route.navigate(['categoria'])
+          })
+        }),
+         (error) => {
+      console.error('Error al añadir la categoría', error);
+      // Aquí puedes manejar errores, como mostrar un mensaje de error.
+    }
+    }
+   
+    
   }
+ 
 }

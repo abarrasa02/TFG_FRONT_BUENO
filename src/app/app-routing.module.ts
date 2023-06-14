@@ -6,6 +6,10 @@ import { CategoriaComponent } from './Admistracion/categoria/categoria.component
 import { CategoriaDetailComponent } from './Admistracion/categoria-detail/categoria-detail.component';
 import { HomeComponent } from './Admistracion/home/home.component';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
+import { ProductoComponent } from './Admistracion/producto/producto.component';
+import { ProductoDetailComponent } from './Admistracion/producto-detail/producto-detail.component';
+import { ProductoTiendaComponent } from './Admistracion/producto-tienda/producto-tienda.component';
+import { CarritoComponent } from './Admistracion/carrito/carrito.component';
 
 
 const routes:Routes=[
@@ -15,6 +19,11 @@ const routes:Routes=[
   {path: 'register', component:RegisterComponent},
   {path: 'categoria-detail',component:CategoriaDetailComponent},
   {path: 'categoria-detail/:id',component:CategoriaDetailComponent},
+  {path:'producto',component:ProductoComponent},
+  {path:'producto-detail',component:ProductoDetailComponent},
+  {path:'producto-detail/:id',component:ProductoDetailComponent},
+  {path:'producto-tienda',component:ProductoTiendaComponent},
+  {path:'carrito',component:CarritoComponent}
 ]
 
 @NgModule({
