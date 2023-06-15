@@ -10,6 +10,9 @@ import { ProductoComponent } from './Admistracion/producto/producto.component';
 import { ProductoDetailComponent } from './Admistracion/producto-detail/producto-detail.component';
 import { ProductoTiendaComponent } from './Admistracion/producto-tienda/producto-tienda.component';
 import { CarritoComponent } from './Admistracion/carrito/carrito.component';
+import { MensajePedidoComponent } from './Admistracion/mensaje-pedido/mensaje-pedido.component';
+import { DetalleProductoTiendaComponent } from './Admistracion/detalle-producto-tienda/detalle-producto-tienda.component';
+import { PedidosComponent } from './Admistracion/pedidos/pedidos.component';
 
 
 const routes:Routes=[
@@ -23,7 +26,10 @@ const routes:Routes=[
   {path:'producto-detail',component:ProductoDetailComponent},
   {path:'producto-detail/:id',component:ProductoDetailComponent},
   {path:'producto-tienda',component:ProductoTiendaComponent},
-  {path:'carrito',component:CarritoComponent}
+  {path:'carrito',component:CarritoComponent},
+  {path:'mensajePedido',component:MensajePedidoComponent},
+  {path:'detalleProducto/:id',component:DetalleProductoTiendaComponent},
+  {path:'pedidos',component:PedidosComponent}
 ]
 
 @NgModule({

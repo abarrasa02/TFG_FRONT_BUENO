@@ -4,6 +4,9 @@ import { CarritoService } from 'src/app/Services/carrito.service';
 import { Usuario } from '../Models/usuario.model';
 import { carrito } from '../Models/carrito.model';
 import { ObjectResponse } from 'src/app/core/base/service/backend-service';
+import { Pedido } from '../Models/pedido.model';
+import { DetallePedido } from '../Models/detallePedido.model';
+import { PedidoService } from 'src/app/Services/pedido.service';
 
 @Component({
   selector: 'app-carrito',
@@ -15,14 +18,31 @@ export class CarritoComponent implements OnInit {
   userLog:Usuario
   listCarritoItem:carrito[]=[]
   totalPrecio:number=0;
+  pedido:Pedido
+  detallePedido:DetallePedido
   constructor(private readonly route:Router,
-    private readonly carritoService:CarritoService){
+    private readonly carritoService:CarritoService,
+    private readonly pedidoService:PedidoService){
+      this.pedido={
+        id:0,
+        usuario:null,
+        total:0,
+        fechaPedido:null
+      }
+      this.detallePedido={
+        id:0,
+        pedido:null,
+        producto:null,
+        cantidad:0,
+      }
+      
 
   }
   ngOnInit(): void {
     this.getProductoCarrito();
   }
   getProductoCarrito(){
+    this.totalPrecio=0;
       if(sessionStorage.getItem('user')!=null){
         this.userLog = JSON.parse(sessionStorage.getItem('user'));
         this.carritoService.findById(this.userLog.id).subscribe({
@@ -53,6 +73,7 @@ export class CarritoComponent implements OnInit {
    eliminarProdcutoCarrito(id: number) {
     this.carritoService.deleteProdcutoCarrito(id).subscribe(response=>{
       console.log('Prodcuto eliminado con éxito', response);
+      this.listCarritoItem=[]
       this.getProductoCarrito();
     },
     error => {
@@ -60,7 +81,7 @@ export class CarritoComponent implements OnInit {
     })
   }
 
-  async actualizarCarrito(listCarrito: carrito[]) {
+   actualizarCarrito(listCarrito: carrito[]) {
   
 
     this.carritoService.updateCarrito(listCarrito).subscribe(response=>{
@@ -68,5 +89,23 @@ export class CarritoComponent implements OnInit {
       this.getProductoCarrito();
     })
     
+  }
+
+  crearPedido(){
+      this.pedido.total=this.totalPrecio;
+      this.pedido.usuario=JSON.parse(sessionStorage.getItem('user'))
+
+      this.pedidoService.addPedido(this.pedido).subscribe((response=>{
+        console.log(response)
+        this.listCarritoItem.forEach(item=>{
+          this.detallePedido.pedido=response.message;
+          this.detallePedido.producto=item.producto;
+          this.detallePedido.cantidad=item.cantidad;
+          this.pedidoService.addDetallePedido(this.detallePedido).subscribe((response=>{
+              console.log(response.message)
+          }))
+        });
+         this.route.navigate(['']);
+      }))
   }
 }

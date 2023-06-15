@@ -29,7 +29,13 @@ export class ProductoTiendaComponent  implements OnInit{
   }
 
   ngOnInit(): void {
-    this.filterProductos();
+
+    if(JSON.parse(sessionStorage.getItem('idCategoria'))==null){
+      this.getProductos();
+    }else{
+        this.filterProductos();
+    }
+    
   }
 
   filterProductos(){
@@ -47,6 +53,20 @@ export class ProductoTiendaComponent  implements OnInit{
   }
   
 
+  getProductos(){
+    this.productoService.getAllProductos().subscribe({
+      next: (response: ObjectResponse<Producto[]>) => {
+        if (response.success) {
+          this.listProdcutos = response.message;
+          console.log(this.listProdcutos);
+        } else {
+          
+          console.log(response.error)
+        }
+      }
+    })
+  }
+
    addCartItem(product: Producto) {
     if(sessionStorage.getItem('user')==null){
       this.route.navigate(['/login']);
@@ -60,5 +80,9 @@ export class ProductoTiendaComponent  implements OnInit{
         })
     }
   
+  }
+
+  detalleProducto(id:number){
+      this.route.navigate(['detalleProducto/',id]);
   }
 }

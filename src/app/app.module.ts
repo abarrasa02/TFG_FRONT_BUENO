@@ -24,6 +24,10 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ProductoTiendaComponent } from './Admistracion/producto-tienda/producto-tienda.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CarritoComponent } from './Admistracion/carrito/carrito.component';
+import { PedidoComponent } from './Admistracion/pedido/pedido.component';
+import { MensajePedidoComponent } from './Admistracion/mensaje-pedido/mensaje-pedido.component';
+import { DetalleProductoTiendaComponent } from './Admistracion/detalle-producto-tienda/detalle-producto-tienda.component';
+import { PedidosComponent } from './Admistracion/pedidos/pedidos.component';
 
 
 
@@ -40,7 +44,11 @@ import { CarritoComponent } from './Admistracion/carrito/carrito.component';
     CategoriaDetailComponent,
     HomeComponent,
     ProductoTiendaComponent,
-    CarritoComponent
+    CarritoComponent,
+    PedidoComponent,
+    MensajePedidoComponent,
+    DetalleProductoTiendaComponent,
+    PedidosComponent
   ],
   imports: [
     BrowserModule,

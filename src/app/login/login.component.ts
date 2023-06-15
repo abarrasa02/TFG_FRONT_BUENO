@@ -11,6 +11,8 @@ import * as bcrypt from 'bcryptjs';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  errorMessage:String="";
+  isErrorMessage:boolean=false;
   usuario: string = '';
   contrasena: string = '';
 constructor(private readonly router: Router,
@@ -32,7 +34,10 @@ login() {
       this.router.navigate(['']); // Redirigir a la página de inicio
     },
     (error) => {
+      debugger
       // Aquí puedes manejar el error en caso de inicio de sesión fallido
+      this.isErrorMessage=true;
+      this.errorMessage=error;
       console.error('Error al iniciar sesión', error);
       // Por ejemplo, mostrar un mensaje de error en el formulario de inicio de sesión
     }

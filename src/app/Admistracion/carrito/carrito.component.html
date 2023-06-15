@@ -35,7 +35,7 @@
                         </div>
                       </div>
                     </td>
-                    <td class="cart__price">${{(item.producto.precio * item.cantidad).toFixed(2)}}</td>
+                    <td class="cart__price">{{(item.producto.precio * item.cantidad).toFixed(2)}} €</td>
                     <td class="cart__close"><a (click)="eliminarProdcutoCarrito(item.id)" class="close"><i class="fa fa-close"></i></a></td>
                   </tr>
                 </tbody>
@@ -45,7 +45,7 @@
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="continue__btn">
-                <a href="shop">Continuar comprando</a>
+                <a href="">Continuar comprando</a>
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -60,9 +60,9 @@
             <h6>Total del carrito</h6>
             <ul>
              
-              <li>Total <span>$ {{totalPrecio.toFixed(2)}}</span></li>
+              <li>Total <span> {{totalPrecio.toFixed(2)}} €</span></li>
             </ul>
-            <a href="check-out" class="primary-btn" *ngIf="listCarritoItem[0]">Continuar al pago</a>
+            <a  (click)="crearPedido()" class="primary-btn" *ngIf="listCarritoItem[0]">Continuar al pago</a>
           </div>
         </div>
       </div>

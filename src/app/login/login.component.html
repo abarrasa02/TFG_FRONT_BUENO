@@ -11,6 +11,7 @@
             <input type="password" name="contrasena" [(ngModel)]="contrasena" required>
             <label>Contraseña</label>
         </div>
+        <span class="error-message" *ngIf="isErrorMessage">{{errorMessage}}</span>
         <input type="button" value="Iniciar sesion" (click)="login()">
         <div class="signup_link">
             <a (click)="register()">Registrate aqui</a>

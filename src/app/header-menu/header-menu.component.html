@@ -4,14 +4,12 @@
     </div>
     <nav>
         <ul class="nav-links">
-            <li class="dropdown">
-                <a *ngIf="isAdmin">ADMIN</a>
-                <ul class="dropdown-menu">
-                    <li><a href="">Productos</a></li>
-                    <li><a (click)="categoria()">Categorias</a></li>
-                </ul>
-            </li>
+            <li><a  *ngIf="isAdmin " (click)="producto()">Productos</a></li>
+            <li><a  *ngIf="isAdmin "(click)="categoria()">Categorias</a></li>
+          
             <li class="spacer"></li>
+            <li><a  (click)="verCatalogo()">CATALOGO</a></li>
+            <li><a *ngIf="uLog" (click)="pedidos()">TUS PEDIDOS</a></li>
             <li><a *ngIf="!uLog" (click)="login()">LOGIN</a></li>
             <li><a *ngIf="!uLog" (click)="register()">REGISTER</a></li>
             <li><a  (click)="carrito()">CARRITO</a></li>

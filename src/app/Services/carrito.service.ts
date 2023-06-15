@@ -28,8 +28,8 @@ export class CarritoService {
   deleteProdcutoCarrito(id: number): Observable<any> {
     return this.http.delete<any>(`${this.urlApi}/delete/${id}`);
   }
-  updateCarrito(listProdcutos:Array<carrito>):Observable<any>{
-    return this.http.put<any>(`${this.urlApi}/modificar`,listProdcutos);
+  updateCarrito(listCarrito:Array<carrito>):Observable<any>{
+    return this.http.put<any>(`${this.urlApi}/modificar`,listCarrito);
   }
 
  

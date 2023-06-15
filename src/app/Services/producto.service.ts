@@ -51,4 +51,5 @@ deleteProducto(id: number): Observable<any> {
       `${this.urlApi}/filter/${id}`,
     )
   }
+ 
 }

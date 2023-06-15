@@ -73,4 +73,10 @@ export class HeaderMenuComponent  implements OnInit{
   producto(){
     this.router.navigate(['producto'])
   }
+  pedidos(){
+    this.router.navigate(['pedidos'])
+  }
+  verCatalogo(){
+    this.router.navigate(['producto-tienda'])
+  }
 }
