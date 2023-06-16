@@ -6,8 +6,9 @@
     </div>
 
     <div class="form-group" style="margin-bottom: 10px;">
+      <div *ngIf="errorMensaje" class="error-message">{{ errorMensaje }}</div>
       <label for="imagen" style="display: block; font-weight: bold;">Imagen:</label>
-      <input type="file" id="imagen" class="form-control" (change)="onFileChange($event)" name="imagen" required>
+      <input type="file" id="imagen" class="form-control" accept=".jpeg,.jpg" (change)="onFileChange($event)" name="imagen" required>
     </div>
 
     <div class="form-group" style="margin-bottom: 10px;">
@@ -15,6 +16,6 @@
       <input type="text" id="activo" pInputText [(ngModel)]="categoria.activo" name="activo" required>
     </div>
   
-    <button type="submit" pButton>Submit</button>
+    <button *ngIf="isSubmit"  type="submit" pButton>Submit</button>
   </form>
 </div>

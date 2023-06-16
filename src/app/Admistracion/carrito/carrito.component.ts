@@ -105,7 +105,7 @@ export class CarritoComponent implements OnInit {
               console.log(response.message)
           }))
         });
-         this.route.navigate(['']);
+         this.route.navigate(['mensajepedido']);
       }))
   }
 }

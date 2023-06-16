@@ -19,16 +19,7 @@ export class HeaderMenuComponent  implements OnInit{
   } 
    ngOnInit(): void {
 
-    this.items = [
-      {
-          label: 'Administrador',
-          icon: 'fa fa-fw fa-user',
-          items: [
-              {label: 'Productos', icon: 'fa fa-fw fa-product-hunt', routerLink: ['producto']},
-              {label: 'Categorías', icon: 'fa fa-fw fa-list', routerLink: ['categoria']}
-          ]
-      }
-  ];
+
     this.isLogged();
   }
 

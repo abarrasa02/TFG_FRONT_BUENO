@@ -28,6 +28,7 @@ import { PedidoComponent } from './Admistracion/pedido/pedido.component';
 import { MensajePedidoComponent } from './Admistracion/mensaje-pedido/mensaje-pedido.component';
 import { DetalleProductoTiendaComponent } from './Admistracion/detalle-producto-tienda/detalle-producto-tienda.component';
 import { PedidosComponent } from './Admistracion/pedidos/pedidos.component';
+import { FooterComponent } from './Admistracion/footer/footer.component';
 
 
 
@@ -48,7 +49,8 @@ import { PedidosComponent } from './Admistracion/pedidos/pedidos.component';
     PedidoComponent,
     MensajePedidoComponent,
     DetalleProductoTiendaComponent,
-    PedidosComponent
+    PedidosComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

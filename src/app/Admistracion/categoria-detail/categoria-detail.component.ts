@@ -17,6 +17,8 @@ export class CategoriaDetailComponent implements OnInit {
     imagen: null,
     activo: ''
   };
+  errorMensaje: string = '';
+  isSubmit:boolean=false
   op: OPERACION = OPERACION.NEW;
   OPS = OPERACION;
   imagenBase64: string = "";
@@ -43,8 +45,19 @@ export class CategoriaDetailComponent implements OnInit {
   }
   
   onFileChange(event) {
-    
-  this.imagenCat=event.target.files[0];
+
+    const file: File = event.target.files[0];
+    if (file && file.type === 'image/jpeg') {
+      this.imagenCat = file; // Asigna el archivo a la variable imagenCat
+      this.errorMensaje = ''; // Reinicia el mensaje de error si el archivo es una imagen JPEG
+      this.isSubmit=true;
+      // Realiza las acciones adicionales necesarias para la imagen JPEG
+    } else {
+      this.isSubmit=false
+      this.imagenCat = null; // Reinicia la variable imagenCat si el archivo no es una imagen JPEG
+      this.errorMensaje = 'Debe seleccionar un archivo de imagen JPEG (.jpg)'; // Establece el mensaje de error
+    }
+    this.imagenCat=event.target.files[0];
   }
   
 

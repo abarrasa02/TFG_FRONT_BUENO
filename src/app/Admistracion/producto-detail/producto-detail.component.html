@@ -7,8 +7,9 @@
     </div>
 
     <div class="form-group" style="margin-bottom: 10px;">
+      <div *ngIf="errorMensaje" class="error-message">{{ errorMensaje }}</div>
       <label for="imagen" style="display: block; font-weight: bold;">Imagen:</label>
-      <input type="file" id="imagen" class="form-control" (change)="onFileChange($event)" name="imagen" required>
+      <input type="file" #fileInput id="imagen" class="form-control" accept=".jpeg,.jpg" (change)="onFileChange($event)" name="imagen" required>
     </div>
 
     <div class="form-group" style="margin-bottom: 10px;">
@@ -18,7 +19,7 @@
 
     <div class="form-group" style="margin-bottom: 10px;">
       <label for="precio" style="display: block; font-weight: bold;">Precio:</label>
-      <input type="text" id="precio" pInputText [(ngModel)]="producto.precio" name="precio" required>
+      <input type="number" id="precio" pInputText [(ngModel)]="producto.precio" name="precio" required>
     </div>
 
     <div class="form-group" style="margin-bottom: 10px;">
@@ -30,7 +31,6 @@
       <label for="activo" style="display: block; font-weight: bold;">Activo:</label>
       <input type="text" id="activo" pInputText [(ngModel)]="producto.activo" name="activo" required>
     </div>
-
-    <button type="submit" pButton>Añadir producto</button>
+    <button  *ngIf="isSubmit"    type="submit" pButton>Añadir producto</button>
   </form>
 </div>

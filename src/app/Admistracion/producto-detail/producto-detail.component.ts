@@ -24,9 +24,11 @@ export class ProductoDetailComponent implements OnInit {
     imagen: null,
     activo: ''
   };
+  errorMensaje: string = '';
   op: OPERACION = OPERACION.NEW;
   OPS = OPERACION;
   imagenCat:File=null;
+  isSubmit:boolean=false
   idProducto:number;
   idCategoria:number;
   ListCategorias:Categoria[]=[];
@@ -52,6 +54,18 @@ export class ProductoDetailComponent implements OnInit {
   }
 
   onFileChange(event) {
+
+    const file: File = event.target.files[0];
+    if (file && file.type === 'image/jpeg') {
+      this.imagenCat = file; // Asigna el archivo a la variable imagenCat
+      this.errorMensaje = ''; // Reinicia el mensaje de error si el archivo es una imagen JPEG
+      this.isSubmit=true;
+      // Realiza las acciones adicionales necesarias para la imagen JPEG
+    } else {
+      this.isSubmit=false
+      this.imagenCat = null; // Reinicia la variable imagenCat si el archivo no es una imagen JPEG
+      this.errorMensaje = 'Debe seleccionar un archivo de imagen JPEG (.jpg)'; // Establece el mensaje de error
+    }
     this.imagenCat=event.target.files[0];
   }
   onChangeCategoria(event:any){
@@ -62,10 +76,8 @@ export class ProductoDetailComponent implements OnInit {
    console.log(this.producto);
   }
 
-
   cogerCategorias(){
     this.categoriaService.getAllCategorias().subscribe({
-     
        next:(response:ObjectResponse<Categoria[]>)=>{
          if(response.success){
           this.ListCategorias=response.message;

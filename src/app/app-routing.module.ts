@@ -13,6 +13,7 @@ import { CarritoComponent } from './Admistracion/carrito/carrito.component';
 import { MensajePedidoComponent } from './Admistracion/mensaje-pedido/mensaje-pedido.component';
 import { DetalleProductoTiendaComponent } from './Admistracion/detalle-producto-tienda/detalle-producto-tienda.component';
 import { PedidosComponent } from './Admistracion/pedidos/pedidos.component';
+import { PedidoComponent } from './Admistracion/pedido/pedido.component';
 
 
 const routes:Routes=[
@@ -29,7 +30,8 @@ const routes:Routes=[
   {path:'carrito',component:CarritoComponent},
   {path:'mensajePedido',component:MensajePedidoComponent},
   {path:'detalleProducto/:id',component:DetalleProductoTiendaComponent},
-  {path:'pedidos',component:PedidosComponent}
+  {path:'pedidos',component:PedidosComponent},
+  {path:'mensajepedido',component:PedidoComponent}
 ]
 
 @NgModule({
