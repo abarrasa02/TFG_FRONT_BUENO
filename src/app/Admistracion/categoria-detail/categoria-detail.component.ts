@@ -17,7 +17,9 @@ export class CategoriaDetailComponent implements OnInit {
     imagen: null,
     activo: ''
   };
+  showError=false;s
   errorMensaje: string = '';
+  errorMensajeImage: string = '';
   isSubmit:boolean=false
   op: OPERACION = OPERACION.NEW;
   OPS = OPERACION;
@@ -49,13 +51,13 @@ export class CategoriaDetailComponent implements OnInit {
     const file: File = event.target.files[0];
     if (file && file.type === 'image/jpeg') {
       this.imagenCat = file; // Asigna el archivo a la variable imagenCat
-      this.errorMensaje = ''; // Reinicia el mensaje de error si el archivo es una imagen JPEG
+      this.errorMensajeImage = ''; // Reinicia el mensaje de error si el archivo es una imagen JPEG
       this.isSubmit=true;
       // Realiza las acciones adicionales necesarias para la imagen JPEG
     } else {
       this.isSubmit=false
       this.imagenCat = null; // Reinicia la variable imagenCat si el archivo no es una imagen JPEG
-      this.errorMensaje = 'Debe seleccionar un archivo de imagen JPEG (.jpg)'; // Establece el mensaje de error
+      this.errorMensajeImage = 'Debe seleccionar un archivo de imagen JPEG (.jpg)'; // Establece el mensaje de error
     }
     this.imagenCat=event.target.files[0];
   }
@@ -77,6 +79,12 @@ export class CategoriaDetailComponent implements OnInit {
     this.route.navigate(['categoria'])
   }
   onSubmit() {
+    if (!this.categoria.nombre.trim() || !this.categoria.activo.trim()) {
+      this.showError = true;
+      this.errorMensaje = 'Por favor, complete todos los campos antes de enviar.';
+      
+      return;
+    }
 
     if(this.op==this.OPS.NEW){
       this.categoriaService.addCategoria(this.categoria).subscribe(

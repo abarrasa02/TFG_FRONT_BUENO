@@ -39,9 +39,13 @@ export class CarritoComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.getProductoCarrito();
+     this.getProductoCarrito();
+    this.loadPaypalScript().then(() => {
+      // The PayPal script is loaded, you can now initialize the PayPal button
+      this.initializePaypalButton();
+    });
   }
-  getProductoCarrito(){
+   async getProductoCarrito(){
     this.totalPrecio=0;
       if(sessionStorage.getItem('user')!=null){
         this.userLog = JSON.parse(sessionStorage.getItem('user'));
@@ -89,6 +93,26 @@ export class CarritoComponent implements OnInit {
       this.getProductoCarrito();
     })
     
+  }
+
+  loadPaypalScript(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const scriptElement = document.createElement('script');
+      scriptElement.src = 'https://www.paypal.com/sdk/js?client-id=test&currency=USD';
+      scriptElement.onload = resolve;
+      document.body.appendChild(scriptElement);
+    });
+  }
+
+  initializePaypalButton(): void {
+    (window as any).paypal.Buttons({
+      createOrder: () => {
+        // Implement your logic to call your server to create the order
+      },
+      onApprove: (data: any) => {
+        // Implement your logic to call your server to capture the order
+      }
+    }).render('#paypal-button-container');
   }
 
   crearPedido(){

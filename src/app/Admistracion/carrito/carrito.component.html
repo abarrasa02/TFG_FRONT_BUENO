@@ -59,10 +59,10 @@
           <div class="cart__total">
             <h6>Total del carrito</h6>
             <ul>
-             
               <li>Total <span> {{totalPrecio.toFixed(2)}} €</span></li>
             </ul>
-            <a  (click)="crearPedido()" class="primary-btn" *ngIf="listCarritoItem[0]">Continuar al pago</a>
+            <div (click)="crearPedido()"   id="paypal-button-container"></div>
+             <a  (click)="crearPedido()" class="primary-btn" *ngIf="listCarritoItem[0]">Continuar al pago</a> 
           </div>
         </div>
       </div>

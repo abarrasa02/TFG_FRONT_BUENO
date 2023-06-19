@@ -6,6 +6,7 @@ import { OPERACION } from '../Utils/constantes';
 import { CategoriaService } from 'src/app/Services/categoria.service';
 import { Categoria } from '../Models/categoria.model';
 import { ObjectResponse } from 'src/app/core/base/service/backend-service';
+import { StockService } from 'src/app/Services/stock.service';
 
 @Component({
   selector: 'app-producto-detail',
@@ -19,17 +20,20 @@ export class ProductoDetailComponent implements OnInit {
     id: 0,
     nombre: '',
     descripcion:'',
-    precio:0,
-    categoria:0,
+    precio:null,
+    categoria:null,
     imagen: null,
     activo: ''
   };
+  showError = false;
   errorMensaje: string = '';
+  errorMensajeImage: string = '';
   op: OPERACION = OPERACION.NEW;
   OPS = OPERACION;
   imagenCat:File=null;
   isSubmit:boolean=false
   idProducto:number;
+  idStock:number;
   idCategoria:number;
   ListCategorias:Categoria[]=[];
   imagenBase64: string = "";
@@ -37,6 +41,7 @@ export class ProductoDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private readonly productoService: ProductoService,
     private readonly categoriaService:CategoriaService,
+    private readonly stockService:StockService,
     private readonly route: Router
   ) {
   }
@@ -58,15 +63,16 @@ export class ProductoDetailComponent implements OnInit {
     const file: File = event.target.files[0];
     if (file && file.type === 'image/jpeg') {
       this.imagenCat = file; // Asigna el archivo a la variable imagenCat
-      this.errorMensaje = ''; // Reinicia el mensaje de error si el archivo es una imagen JPEG
+      this.errorMensajeImage = ''; // Reinicia el mensaje de error si el archivo es una imagen JPEG
       this.isSubmit=true;
+      this.imagenCat=event.target.files[0];
       // Realiza las acciones adicionales necesarias para la imagen JPEG
     } else {
       this.isSubmit=false
       this.imagenCat = null; // Reinicia la variable imagenCat si el archivo no es una imagen JPEG
-      this.errorMensaje = 'Debe seleccionar un archivo de imagen JPEG (.jpg)'; // Establece el mensaje de error
+      this.errorMensajeImage = 'Debe seleccionar un archivo de imagen JPEG (.jpg)'; // Establece el mensaje de error
     }
-    this.imagenCat=event.target.files[0];
+    
   }
   onChangeCategoria(event:any){
    
@@ -105,11 +111,26 @@ export class ProductoDetailComponent implements OnInit {
   onSubmit() {
 
 
+    this.showError = false;
+    if (!this.producto.nombre.trim() ||
+    !this.producto.descripcion.trim() ||
+    !this.producto.precio ||
+    !this.producto.categoria ||
+    !this.producto.activo.trim()) {
+    this.showError = true;
+    this.errorMensaje = 'Por favor, complete todos los campos antes de enviar.';
+    return;
+}
+
     if(this.op==this.OPS.NEW){
       console.log(this.producto)
       this.productoService.addProdcuto(this.producto).subscribe(
       (response) => {
         console.log(response);
+        this.idStock=response.message;
+        this.stockService.addStock(response.message).subscribe((response)=>{
+          console.log(response.message)
+        })
         this.productoService.addImagenprodcuto(this.imagenCat,response.message).subscribe((response)=>{
           console.log("Se ha añadido correctmente la imagen")
           this.route.navigate(['producto'])
@@ -120,7 +141,9 @@ export class ProductoDetailComponent implements OnInit {
         console.error('Error al añadir el producto', error);
         // Aquí puedes manejar errores, como mostrar un mensaje de error.
       }
+      
     );
+
     }else if(this.op=this.OPS.EDIT){
       console.log(this.producto)
         this.productoService.editProducto(this.producto,this.idProducto).subscribe((response)=>{
