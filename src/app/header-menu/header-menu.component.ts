@@ -13,6 +13,7 @@ export class HeaderMenuComponent  implements OnInit{
   userLog:boolean=false;
   userLogged:Usuario
   uLog:Boolean;
+  nombreUser:string='';
   isAdmin:boolean=false;
   constructor(private readonly router:Router){
 
@@ -33,8 +34,10 @@ export class HeaderMenuComponent  implements OnInit{
     }
     if(this.userLogged!=null){
       this.uLog=true;
+      this.nombreUser=this.userLogged.nombre+" "+this.userLogged.apellido;
     }else{
       this.uLog=false;
+      this.nombreUser='';
     }
   }
    }

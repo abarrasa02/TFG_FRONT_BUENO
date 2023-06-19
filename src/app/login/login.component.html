@@ -2,6 +2,7 @@
 <body>
 <div class="center">  
     <h1>Inicio sesion</h1>
+    <span class="error-message" *ngIf="isErrorMessage">{{errorMessage}}</span>
     <form method="post">
         <div class="txt_field">
             <input type="text"  name="usuario" [(ngModel)]="usuario" required>

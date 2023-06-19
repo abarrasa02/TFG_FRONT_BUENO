@@ -48,6 +48,9 @@
                 <li class="nav-item">
                     <a  *ngIf="!uLog" class="nav-link" (click)="login()"><i class="fas fa-user"></i></a>
                 </li>
+                <li   *ngIf="uLog" class="nav-item">
+                    <a   class="nav-link" ><i class="fas fa-user"><span>{{nombreUser}}</span></i></a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" (click)="carrito()"><i class="fas fa-shopping-cart"></i></a>
                 </li>
