@@ -103,6 +103,9 @@ export class CarritoComponent implements OnInit {
       document.body.appendChild(scriptElement);
     });
   }
+  productos(){
+    this.route.navigate(['producto-tienda'])
+  }
 
   initializePaypalButton(): void {
     (window as any).paypal.Buttons({
