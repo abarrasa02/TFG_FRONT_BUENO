@@ -15,6 +15,12 @@ export class StockService {
     return this.http.post<any>(`${this.urlApi}/add/${idProducto}`, { headers: headers });
   }
 
+  getAllStock():Observable<any>{
+    return this.http.get<ObjectResponse<any>>(
+      `${this.urlApi}/all`,
+    )
+}
+
   editStock(stock:any,id:number){
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.patch<any>(

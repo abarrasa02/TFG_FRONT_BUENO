@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../Services/usuario.service';
 import * as bcrypt from 'bcryptjs';
+import { Usuario } from '../Admistracion/Models/usuario.model';
 
 
 
@@ -27,7 +28,7 @@ ngOnInit(): void {
 login() {
   this.userService.loginUser(this.usuario, this.contrasena).subscribe(
     (usuario: any) => {
-      
+      debugger
       // Aquí puedes manejar la respuesta del servicio después del inicio de sesión exitoso
       usuario.message.contrasena=this.encryptPassword(usuario.message.contrasena);
       sessionStorage.setItem('user',JSON.stringify(usuario.message));

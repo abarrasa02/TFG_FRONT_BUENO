@@ -29,6 +29,7 @@ import { MensajePedidoComponent } from './Admistracion/mensaje-pedido/mensaje-pe
 import { DetalleProductoTiendaComponent } from './Admistracion/detalle-producto-tienda/detalle-producto-tienda.component';
 import { PedidosComponent } from './Admistracion/pedidos/pedidos.component';
 import { FooterComponent } from './Admistracion/footer/footer.component';
+import { StockComponent } from './Admistracion/stock/stock.component';
 
 
 
@@ -51,7 +52,8 @@ import { FooterComponent } from './Admistracion/footer/footer.component';
     MensajePedidoComponent,
     DetalleProductoTiendaComponent,
     PedidosComponent,
-    FooterComponent
+    FooterComponent,
+    StockComponent
   ],
   imports: [
     BrowserModule,
