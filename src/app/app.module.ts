@@ -34,6 +34,7 @@ import { StockComponent } from './Admistracion/stock/stock.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

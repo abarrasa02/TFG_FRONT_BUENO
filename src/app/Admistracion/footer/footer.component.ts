@@ -22,4 +22,7 @@ export class FooterComponent implements OnInit {
     pedidos(){
       this.router.navigate(['pedidos'])
     }
+    productos(){
+      this.router.navigate(['producto-tienda'])
+    }
 }
